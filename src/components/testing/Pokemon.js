@@ -4,15 +4,23 @@ import './styles/pokemon.css';
 
 
 function Pokemon() {
-    const savedIndex = localStorage.getItem('index')
+    let savedIndex = localStorage.getItem('index')
+
+    if (savedIndex > (pokemon.length - 1) || savedIndex < 0) {
+        savedIndex = 0;
+    }
+
     const [index, setIndex] = useState(savedIndex ? JSON.parse(savedIndex) : 0)
 
     const [showMore, setShowMore] = useState(false)
 
 
+
+
     useEffect(() => {
         localStorage.setItem('index', JSON.stringify(index))
     }, [index])
+
 
     let object = pokemon[index]
 
