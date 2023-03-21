@@ -1,11 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { pokemon } from './data/pokemon';
 import './styles/pokemon.css';
 
 
 function Pokemon() {
-    const [index, setIndex] = useState(0)
+    const savedIndex = localStorage.getItem('index')
+    const [index, setIndex] = useState(savedIndex ? JSON.parse(savedIndex) : 0)
+
     const [showMore, setShowMore] = useState(false)
+
+
+    useEffect(() => {
+        localStorage.setItem('index', JSON.stringify(index))
+    }, [index])
 
     let object = pokemon[index]
 
